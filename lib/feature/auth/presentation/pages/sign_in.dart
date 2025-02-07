@@ -1,26 +1,22 @@
 import 'package:blog_project/core/theme/app_pallete.dart';
-import 'package:blog_project/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_project/feature/auth/presentation/widgets/auth_button.dart';
 import 'package:blog_project/feature/auth/presentation/widgets/auth_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpPage extends StatefulWidget {
-  SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  final nameController = TextEditingController();
+class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     // TODO: implement dispose
@@ -39,25 +35,21 @@ class _SignUpPageState extends State<SignUpPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Sign Up",
+              "Sign In",
               style: TextStyle(
                   fontSize: 24,
                   color: AppPallete.whiteColor,
                   fontWeight: FontWeight.w700),
             ),
             Text(
-              "Please fill all the fields to register your account.",
+              "Please fill all the fields to sign in your account.",
               style: TextStyle(fontSize: 12, color: AppPallete.greyColor),
             ),
             SizedBox(
               height: 10,
             ),
-            AuthField(
-              hintText: 'Name',
-              controller: nameController,
-            ),
             SizedBox(
-              height: 15,
+              height: 10,
             ),
             AuthField(
               hintText: 'Email',
@@ -75,16 +67,10 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 30,
             ),
             AuthGradientButton(
-              title: 'Sign Up',
+              title: 'Sign in',
               onpressed: () {
                 // ignore: avoid_print
-                print(nameController.text);
-                if (formKey.currentState!.validate()) {
-                  context.read<AuthBloc>().add(AuthSignUp(
-                      name: nameController.text,
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim()));
-                }
+                print(emailController.text);
               },
             ),
             SizedBox(
@@ -94,11 +80,11 @@ class _SignUpPageState extends State<SignUpPage> {
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                    text: 'Already have an account?',
+                    text: "Don't have an account?",
                     style: Theme.of(context).textTheme.titleMedium!,
                     children: [
                       TextSpan(
-                          text: " Sign in",
+                          text: " Sign up",
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
